@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -34,14 +35,26 @@ public class Drive extends Subsystem {
         setLeft(speed);
         setRight(speed);
     }
+    public void set(ControlMode mode, double value) {
+        setLeft(mode, value);
+        setRight(mode, value);
+    }
     
     public void setLeft(double speed) {
         leftTalon1.set(speed);
         leftTalon2.set(speed);
     }
+    public void setLeft(ControlMode mode, double value) {
+        leftTalon1.set(mode, value);
+        leftTalon2.set(mode, value);
+    }
     public void setRight(double speed) {
         rightTalon1.set(speed);
         rightTalon2.set(speed);
+    }
+    public void setRight(ControlMode mode, double value) {
+        rightTalon1.set(mode, value);
+        rightTalon2.set(mode, value);
     }
 
 }

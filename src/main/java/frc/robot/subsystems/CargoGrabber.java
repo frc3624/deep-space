@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CargoGrabber extends Subsystem {
 
-    public static final int LEFT_CARGO_GRABBER_WHEELS_ID = -1;
-    public static final int RIGHT_CARGO_GRABBER_WHEELS_ID = -1;
+    private static final int LEFT_CARGO_GRABBER_WHEELS_ID = -1;
+    private static final int RIGHT_CARGO_GRABBER_WHEELS_ID = -1;
     private final WPI_TalonSRX leftWheels = new WPI_TalonSRX(LEFT_CARGO_GRABBER_WHEELS_ID);
     private final WPI_TalonSRX rightWheels = new WPI_TalonSRX(RIGHT_CARGO_GRABBER_WHEELS_ID);
 

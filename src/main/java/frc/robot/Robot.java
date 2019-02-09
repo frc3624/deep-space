@@ -6,12 +6,12 @@ import frc.robot.subsystems.*;
 
 public class Robot extends TimedRobot {
 
-    public static final int PNEUMATICS_CONTROL_MODULE_ID = 3; //Placed in the robot class because it is used by multiple subsystems
+    public static final int PNEUMATICS_CONTROL_MODULE_ID = 3; //Placed in the Robot class because it is used by multiple subsystems
 
     public static Vision vision = new Vision();
 
     public static Drive drive = new Drive();
-    public static Level3LifterWheels level3LifterWheels = new Level3LifterWheels();;
+    public static SecondaryWheels secondaryWheels = new SecondaryWheels();
     public static CargoGrabber cargoGrabber = new CargoGrabber();
     public static HatchLifter hatchLifter = new HatchLifter();
 
@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
-
+        commonAutoAndTeleopPeriodic();
     }
     
     @Override
@@ -54,6 +54,13 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {
+        commonAutoAndTeleopPeriodic();
+    }
+    
+    /**
+     * Our autonomous and teleop code shares a lot, so the shared code is in this method
+     */
+    private void commonAutoAndTeleopPeriodic() {
         Scheduler.getInstance().run();
     }
 }
