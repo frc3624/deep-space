@@ -29,6 +29,11 @@ public class Drive extends Subsystem {
         differentialDrive1.arcadeDrive(xSpeed, zRotation);
         differentialDrive2.arcadeDrive(xSpeed, zRotation);
     }
+
+    public void set(double speed) {
+        setLeft(speed);
+        setRight(speed);
+    }
     
     public void setLeft(double speed) {
         leftTalon1.set(speed);

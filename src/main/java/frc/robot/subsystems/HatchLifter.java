@@ -7,7 +7,7 @@ import frc.robot.commands.RunHatchLifterWithController;
 
 public class HatchLifter extends Subsystem {
 
-    public static final int HATCH_LIFTER_TALON_ID = -1;
+    public static final int HATCH_LIFTER_TALON_ID = 3;
     private final WPI_TalonSRX hatchLifterTalon = new WPI_TalonSRX(HATCH_LIFTER_TALON_ID);
     
     @Override

@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -15,9 +8,9 @@ import frc.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class RunDriveTrain extends Command {
+public class AlignWithSide extends Command {
 
-    public RunDriveTrain() {
+    public AlignWithSide() {
         requires(Robot.drive);
     }
 
@@ -29,14 +22,13 @@ public class RunDriveTrain extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        GenericHID controller = Robot.oi.getController();
-        Robot.drive.arcadeDrive(controller.getY(Hand.kLeft), controller.getX(Hand.kLeft));
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return Robot.vision.hasTargetVisual() && Robot.vision.isHorizontallyAligned() && Robot.vision.isVerticallyAligned();
     }
 
     // Called once after isFinished returns true
@@ -48,6 +40,7 @@ public class RunDriveTrain extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+
     }
-    
+
 }
