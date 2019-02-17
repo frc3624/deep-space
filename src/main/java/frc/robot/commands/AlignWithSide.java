@@ -12,7 +12,6 @@ public class AlignWithSide extends Command
 
     public AlignWithSide() 
     {
-
         requires(Robot.drive);
     }
 

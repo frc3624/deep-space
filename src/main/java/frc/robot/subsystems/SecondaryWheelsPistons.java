@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -10,27 +9,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class SecondaryWheelsPistons extends Subsystem 
 {
 
-    private final DoubleSolenoid leftPiston;
-    private final DoubleSolenoid rightPiston;
+    private final Solenoid leftPiston;
+    private final Solenoid rightPiston;
 
-    public SecondaryWheelsPistons(int pcmID, 
-                                    int leftPistonForwardSolenoidID, int leftPistonReverseSolenoidID,
-                                    int rightPistonForwardSolenoidID, int rightPistonReverseSolenoidID) 
+    public SecondaryWheelsPistons(int pcmID, int leftPistonChannel, int rightPistonChannel)
     {
-        leftPiston = new DoubleSolenoid(pcmID, leftPistonForwardSolenoidID, leftPistonReverseSolenoidID);
-        rightPiston = new DoubleSolenoid(pcmID, rightPistonForwardSolenoidID, rightPistonReverseSolenoidID);
+        leftPiston = new Solenoid(pcmID, leftPistonChannel);
+        rightPiston = new Solenoid(pcmID, rightPistonChannel);
     }
 
     public void extend() 
     {
-        leftPiston.set(Value.kForward);
-        rightPiston.set(Value.kForward);
+        leftPiston.set(true);
+        rightPiston.set(true);
     }
 
     public void retract() 
     {
-        leftPiston.set(Value.kReverse);
-        rightPiston.set(Value.kReverse);
+        leftPiston.set(false);
+        rightPiston.set(false);
     }
 
     @Override

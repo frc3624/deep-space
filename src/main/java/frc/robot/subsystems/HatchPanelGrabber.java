@@ -1,25 +1,20 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class HatchPanelGrabber extends Subsystem 
 {
 
-    private final DoubleSolenoid reverseClaw;
-    private DoubleSolenoid bottomPiston;
-    private DoubleSolenoid topPiston;
+    private final Solenoid reverseClaw;
+    private Solenoid pistonSolenoid;
     
-    public HatchPanelGrabber(int pcmID,
-                                int reverseClawForwardID, int reverseClawReverseID,
-                                int bottomPistonForwardID, int bottomPistonReverseID,
-                                int topPistonForwardID, int topPistonReverseID) 
+    public HatchPanelGrabber(int pcmID, int reverseClawChannel, int pistonChannel)    
     {
-        reverseClaw = new DoubleSolenoid(pcmID, reverseClawForwardID, reverseClawReverseID);
-        bottomPiston = new DoubleSolenoid(pcmID, bottomPistonForwardID, bottomPistonReverseID);
-        topPiston = new DoubleSolenoid(pcmID, topPistonForwardID, topPistonReverseID);
+        reverseClaw = new Solenoid(pcmID, reverseClawChannel);
+        pistonSolenoid = new Solenoid(pcmID, pistonChannel);
     }
+
     @Override
     public void initDefaultCommand() 
     {
@@ -29,26 +24,22 @@ public class HatchPanelGrabber extends Subsystem
 
     public void push() 
     {
-
-        bottomPiston.set(Value.kForward);
-        topPiston.set(Value.kForward);
+        
     }
+    
     public void retract() 
     {
 
-        bottomPiston.set(Value.kReverse);
-        topPiston.set(Value.kReverse);
     }
 
     public void openClaw() 
     {
-
-        reverseClaw.set(Value.kForward);
+        reverseClaw.set(false);
     }
+
     public void closeClaw() 
     {
-
-        reverseClaw.set(Value.kReverse);
+        reverseClaw.set(true);
     }
 
 }

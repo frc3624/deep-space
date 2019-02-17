@@ -7,9 +7,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.commands.RunDriveTrain;
 
-public class Drive extends Subsystem 
+public class Drive extends Subsystem
 {
-
     private final WPI_TalonSRX leftTalon1;
     private final WPI_TalonSRX rightTalon1;
     private final DifferentialDrive differentialDrive1;
@@ -43,35 +42,30 @@ public class Drive extends Subsystem
 
     public void set(double speed) 
     {
-
         setLeft(speed);
         setRight(speed);
     }
     
     public void set(ControlMode mode, double value) 
     {
-
         setLeft(mode, value);
         setRight(mode, value);
     }
     
     public void setLeft(double speed) 
     {
-
         leftTalon1.set(speed);
         leftTalon2.set(speed);
     }
 
     public void setLeft(ControlMode mode, double value) 
     {
-
         leftTalon1.set(mode, value);
         leftTalon2.set(mode, value);
     }
 
     public void setRight(double speed) 
     {
-
         rightTalon1.set(speed);
         rightTalon2.set(speed);
     }

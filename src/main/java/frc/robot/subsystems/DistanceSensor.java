@@ -16,7 +16,8 @@ public class DistanceSensor extends Subsystem {
   private final AnalogInput ultrasonicSensor = new AnalogInput(0);
 
   @Override
-  public void periodic() {
+  public void periodic() 
+  {
     
   }
 }
