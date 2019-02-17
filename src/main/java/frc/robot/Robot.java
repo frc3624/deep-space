@@ -1,39 +1,36 @@
 package frc.robot;
 
-import static frc.robot.RobotConstants.*;
+import static frc.robot.RobotConstants.DRIVE_LEFT_TALON_1_ID;
+import static frc.robot.RobotConstants.DRIVE_LEFT_TALON_2_ID;
+import static frc.robot.RobotConstants.DRIVE_RIGHT_TALON_1_ID;
+import static frc.robot.RobotConstants.DRIVE_RIGHT_TALON_2_ID;
+import static frc.robot.RobotConstants.EVO_SHIFTER_CHANNEL;
+import static frc.robot.RobotConstants.PANEL_GRABBER_PISTON_CHANNEL;
+import static frc.robot.RobotConstants.PANEL_GRABBER_REVERSE_CLAW_CHANNEL;
+import static frc.robot.RobotConstants.PNEUMATICS_CONTROL_MODULE_ID;
+import static frc.robot.RobotConstants.FRONT_ULTRASONIC_SENSOR_ID;
+import static frc.robot.RobotConstants.BACK_ULTRASONIC_SENSOR_ID;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-<<<<<<< HEAD
+import frc.robot.subsystems.DistanceSensors;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.GearShifter;
 import frc.robot.subsystems.HatchPanelGrabber;
 import frc.robot.subsystems.Vision;
-=======
-import frc.robot.subsystems.*;
->>>>>>> fda95249e39f027c6e55a1d686f36a63d4878da3
 
 public class Robot extends TimedRobot {
 
     public static Vision vision = new Vision();
-<<<<<<< HEAD
-=======
-    public static DistanceSensor distanceSensor = new DistanceSensor();
->>>>>>> fda95249e39f027c6e55a1d686f36a63d4878da3
+    public static DistanceSensors distanceSensor = new DistanceSensors(FRONT_ULTRASONIC_SENSOR_ID, BACK_ULTRASONIC_SENSOR_ID);
 
+    public static GearShifter gearShifter = new GearShifter(EVO_SHIFTER_CHANNEL);
     public static Drive drive = new Drive(DRIVE_LEFT_TALON_1_ID, DRIVE_RIGHT_TALON_1_ID, 
                                             DRIVE_LEFT_TALON_2_ID, DRIVE_RIGHT_TALON_2_ID);
 
-<<<<<<< HEAD
     public static HatchPanelGrabber hatchPanelGrabber = new HatchPanelGrabber(PNEUMATICS_CONTROL_MODULE_ID, 
                                                                                 PANEL_GRABBER_REVERSE_CLAW_CHANNEL,
                                                                                 PANEL_GRABBER_PISTON_CHANNEL);
-=======
-    public static HatchPanelGrabber hatchPanelGrabber = new HatchPanelGrabber(PNEUMATICS_CONTROL_MODULE_ID,
-                                                                                PANEL_GRABBER_REVERSE_CLAW_FORWARD_CHANNEL, PANEL_GRABBER_REVERSE_CLAW_REVERSE_CHANNEL,
-                                                                                PANEL_GRABBER_BOTTOM_PISTON_FORWARD_CHANNEL, PANEL_GRABBER_BOTTOM_PISTON_REVERSE_CHANNEL,
-                                                                                PANEL_GRABBER_TOP_PISTON_FORWARD_CHANNEL, PANEL_GRABBER_TOP_PISTON_REVERSE_CHANNEL);
-    
->>>>>>> fda95249e39f027c6e55a1d686f36a63d4878da3
     public static OI oi = new OI(0);
 
     @Override

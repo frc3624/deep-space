@@ -19,7 +19,7 @@ public class MoveForwardOntoPlatform extends Command {
     private static final int TRIGGER_DISTANCE = Integer.MAX_VALUE;
     @Override
     protected boolean isFinished() {
-        return Robot.distanceSensor.get() < TRIGGER_DISTANCE;
+        return Robot.distanceSensor.getFront() < TRIGGER_DISTANCE;
     }
 
     @Override
