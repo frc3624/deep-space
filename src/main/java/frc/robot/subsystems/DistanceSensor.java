@@ -8,15 +8,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DistanceSensor extends Subsystem {
 
-  @Override
-  public void initDefaultCommand() {
-    
-  }
+    @Override
+    public void initDefaultCommand() {
 
-  private final AnalogInput ultrasonicSensor = new AnalogInput(0);
+    }
 
-  @Override
-  public void periodic() {
-    
-  }
+    private final AnalogInput ultrasonicSensor = new AnalogInput(0);
+
+    @Override
+    public void periodic() {
+
+    }
+
+    public int get() {
+        return ultrasonicSensor.getAverageValue();
+    }
 }

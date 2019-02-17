@@ -14,7 +14,6 @@ public class RunDriveTrain extends Command
 
     public RunDriveTrain() 
     {
-
         requires(Robot.drive);
     }
 
@@ -29,7 +28,6 @@ public class RunDriveTrain extends Command
     @Override
     protected void execute() 
     {
-
         GenericHID controller = Robot.oi.getController();
         Robot.drive.arcadeDrive(controller.getY(Hand.kLeft), -controller.getX(Hand.kLeft));
     }
@@ -38,9 +36,7 @@ public class RunDriveTrain extends Command
     @Override
     protected boolean isFinished() 
     {
-
-        return false;
-        
+        return false;   
     }
 
     // Called once after isFinished returns true

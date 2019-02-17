@@ -8,8 +8,8 @@ public class HatchPanelGrabber extends Subsystem
 {
 
     private final DoubleSolenoid reverseClaw;
-    private DoubleSolenoid bottomPiston;
-    private DoubleSolenoid topPiston;
+    private DoubleSolenoid leftPiston;
+    private DoubleSolenoid rightPiston;
     
     public HatchPanelGrabber(int pcmID,
                                 int reverseClawForwardID, int reverseClawReverseID,
@@ -17,8 +17,8 @@ public class HatchPanelGrabber extends Subsystem
                                 int topPistonForwardID, int topPistonReverseID) 
     {
         reverseClaw = new DoubleSolenoid(pcmID, reverseClawForwardID, reverseClawReverseID);
-        bottomPiston = new DoubleSolenoid(pcmID, bottomPistonForwardID, bottomPistonReverseID);
-        topPiston = new DoubleSolenoid(pcmID, topPistonForwardID, topPistonReverseID);
+        leftPiston = new DoubleSolenoid(pcmID, bottomPistonForwardID, bottomPistonReverseID);
+        rightPiston = new DoubleSolenoid(pcmID, topPistonForwardID, topPistonReverseID);
     }
     @Override
     public void initDefaultCommand() 
@@ -30,14 +30,14 @@ public class HatchPanelGrabber extends Subsystem
     public void push() 
     {
 
-        bottomPiston.set(Value.kForward);
-        topPiston.set(Value.kForward);
+        leftPiston.set(Value.kForward);
+        rightPiston.set(Value.kForward);
     }
     public void retract() 
     {
 
-        bottomPiston.set(Value.kReverse);
-        topPiston.set(Value.kReverse);
+        leftPiston.set(Value.kReverse);
+        rightPiston.set(Value.kReverse);
     }
 
     public void openClaw() 
