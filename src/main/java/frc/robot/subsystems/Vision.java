@@ -1,18 +1,17 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Vision extends Subsystem {
+public class Vision extends Subsystem
+{
 
     @Override
-    public void initDefaultCommand() {
+    public void initDefaultCommand()
+    {
+
 
     }
 
@@ -28,39 +27,64 @@ public class Vision extends Subsystem {
     private NetworkTableEntry ty = table.getEntry("ty");
     // Target area
     private NetworkTableEntry ta = table.getEntry("ta");
-    
+
     @Override
-    public void periodic() {
+    public void periodic()
+    {
         tv = table.getEntry("tv");
         tx = table.getEntry("tx");
         ty = table.getEntry("ty");
         ta = table.getEntry("ta");
     }
 
-    public double getHorizontalOffset() {
+    public double getHorizontalOffset()
+    {
         return tx.getDouble(0.0);
     }
     private double EPSILON = .1;
-    public boolean isHorizontallyAligned() {
+    public boolean isHorizontallyAligned()
+    {
         return Math.abs(tx.getDouble(0.0)) < EPSILON;
     }
-    public double getVerticalOffset() {
+    public double getVerticalOffset()
+    {
         return ty.getDouble(0.0);
     }
-    public boolean isVerticallyAligned() {
+    public boolean isVerticallyAligned()
+    {
         return Math.abs(ty.getDouble(0.0)) < EPSILON;
     }
 
-    public boolean hasTargetVisual() {
+    public boolean hasTargetVisual()
+    {
         return tv.getBoolean(false);
     }
 
-    private double VISION_MODE = 0, DRIVER_MODE = 1;
-    public void visionMode() {
-        table.getEntry("camMode").setDouble(VISION_MODE);
+    private Mode mode = table.getEntry("camMode").getDouble(0) == 0 ? Mode.VISION : Mode.DRIVER;
+    private enum Mode
+    {
+        VISION(0),
+        DRIVER(1);
+
+        private double value;
+        Mode(double value) {
+            this.value = value;
+        }
+
+        public double getValue() {
+            return value;
+        }
     }
-    public void driverMode() {
-        table.getEntry("camMode").setDouble(DRIVER_MODE);
+    public void visionMode()
+    {
+        mode = Mode.VISION;
+        table.getEntry("camMode").setDouble(mode.getValue());
+    }
+
+    public void driverMode()
+    {
+        mode = Mode.DRIVER;
+        table.getEntry("camMode").setDouble(mode.getValue());
     }
 
 }

@@ -3,32 +3,34 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Wheels used for lifting to level 3
  * @author Kyle Diaz
  */
-public class SecondaryWheels extends Subsystem {
+public class SecondaryWheels extends Subsystem 
+{
 
-    private final static int FRONT_WHEELS_ID;
-    private final WPI_TalonSRX frontWheels = new WPI_TalonSRX(FRONT_WHEELS_ID);
+    private final WPI_TalonSRX wheels;
 
-    private final static int BACK_WHEELS_ID;
-    private final WPI_TalonSRX backWheels = new WPI_TalonSRX(BACK_WHEELS_ID);
+    public SecondaryWheels(int talonID) 
+    {
+        wheels = new WPI_TalonSRX(talonID);
+    }
+
+    public void setWheels(double speed) 
+    {
+        wheels.set(speed);
+    }
+    public void setWheels(ControlMode mode, double value) 
+    {
+        wheels.set(mode, value);
+    }
 
     @Override
-    public void initDefaultCommand() {
+    public void initDefaultCommand() 
+    {
 
-    }
-
-    public void set(double speed) {
-        frontWheels.set(speed);
-        backWheels.set(speed);
-    }
-    public void set(ControlMode mode, double value) {
-        frontWheels.set(mode, value);
     }
 }

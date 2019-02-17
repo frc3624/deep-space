@@ -3,42 +3,51 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.*;
 
-public class HatchPanelGrabber extends Subsystem {
+public class HatchPanelGrabber extends Subsystem 
+{
 
-    private static final int REVERSE_CLAW_FORWARD_CHANNEL = 0;
-    private static final int REVERSE_CLAW_REVERSE_CHANNEL = 1;
-    private final DoubleSolenoid reverseClaw = new DoubleSolenoid(Robot.PNEUMATICS_CONTROL_MODULE_ID, 
-                                                                    REVERSE_CLAW_FORWARD_CHANNEL, REVERSE_CLAW_REVERSE_CHANNEL);
-
-    private static final int BOTTOM_PISTON_FORWARD_CHANNEL = 2;
-    private static final int BOTTOM_PISTON_REVERSE_CHANNEL = 3;
-    private DoubleSolenoid bottomPiston = new DoubleSolenoid(Robot.PNEUMATICS_CONTROL_MODULE_ID, 
-                                                                BOTTOM_PISTON_FORWARD_CHANNEL, BOTTOM_PISTON_REVERSE_CHANNEL);
-    private static final int TOP_PISTON_FORWARD_CHANNEL = 4;
-    private static final int TOP_PISTON_REVERSE_CHANNEL = 5;
-    private DoubleSolenoid topPiston = new DoubleSolenoid(Robot.PNEUMATICS_CONTROL_MODULE_ID, 
-                                                                TOP_PISTON_FORWARD_CHANNEL, TOP_PISTON_REVERSE_CHANNEL);
-
+    private final DoubleSolenoid reverseClaw;
+    private DoubleSolenoid bottomPiston;
+    private DoubleSolenoid topPiston;
+    
+    public HatchPanelGrabber(int pcmID,
+                                int reverseClawForwardID, int reverseClawReverseID,
+                                int bottomPistonForwardID, int bottomPistonReverseID,
+                                int topPistonForwardID, int topPistonReverseID) 
+    {
+        reverseClaw = new DoubleSolenoid(pcmID, reverseClawForwardID, reverseClawReverseID);
+        bottomPiston = new DoubleSolenoid(pcmID, bottomPistonForwardID, bottomPistonReverseID);
+        topPiston = new DoubleSolenoid(pcmID, topPistonForwardID, topPistonReverseID);
+    }
     @Override
-    public void initDefaultCommand() {
+    public void initDefaultCommand() 
+    {
+
 
     }
 
-    public void push() {
+    public void push() 
+    {
+
         bottomPiston.set(Value.kForward);
         topPiston.set(Value.kForward);
     }
-    public void retract() {
+    public void retract() 
+    {
+
         bottomPiston.set(Value.kReverse);
         topPiston.set(Value.kReverse);
     }
 
-    public void openClaw() {
+    public void openClaw() 
+    {
+
         reverseClaw.set(Value.kForward);
     }
-    public void closeClaw() {
+    public void closeClaw() 
+    {
+
         reverseClaw.set(Value.kReverse);
     }
 
