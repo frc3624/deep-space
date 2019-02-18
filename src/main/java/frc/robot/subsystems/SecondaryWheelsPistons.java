@@ -9,25 +9,30 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class SecondaryWheelsPistons extends Subsystem 
 {
 
-    private final Solenoid leftPiston;
-    private final Solenoid rightPiston;
+    private final Solenoid mainPiston;
+    private final Solenoid togglePiston;
 
-    public SecondaryWheelsPistons(int pcmID, int channel)
+    public SecondaryWheelsPistons(int pcmID, int mainChannel, int toggleChannel)
     {
-        leftPiston = new Solenoid(pcmID, channel);
-        rightPiston = new Solenoid(pcmID, channel);
+        mainPiston = new Solenoid(pcmID, mainChannel);
+        togglePiston = new Solenoid(pcmID, toggleChannel);
     }
 
     public void extend() 
     {
-        leftPiston.set(true);
-        rightPiston.set(true);
+        mainPiston.set(true);
     }
 
     public void retract() 
     {
-        leftPiston.set(false);
-        rightPiston.set(false);
+        mainPiston.set(false);
+    }
+
+    public void topThing() {
+        togglePiston.set(true);
+    }
+    public void bottomThing() {
+        togglePiston.set(false);
     }
 
     @Override

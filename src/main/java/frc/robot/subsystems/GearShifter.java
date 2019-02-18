@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Add your docs here.
  */
 public class GearShifter extends Subsystem {
-  public enum GearMode
-  {
-    HIGH(true),
-    LOW(false);
+    public enum GearMode
+    {
+        HIGH(true),
+        LOW(false);
 
         private boolean solenoidState;
 
@@ -30,9 +30,9 @@ public class GearShifter extends Subsystem {
     private final Solenoid evoShifters;
     private GearMode currentMode;
 
-  public GearShifter(int evoShiftersChannel)
+  public GearShifter(int pcmChannel, int evoShiftersChannel)
   {
-    evoShifters = new Solenoid(evoShiftersChannel);
+    evoShifters = new Solenoid(pcmChannel, evoShiftersChannel);
     setGear(GearMode.LOW);
   }
 

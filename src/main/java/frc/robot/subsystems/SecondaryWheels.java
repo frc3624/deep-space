@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.DriveSecondaryWheels;
 
 /**
  * Wheels used for lifting to level 3
@@ -31,6 +32,6 @@ public class SecondaryWheels extends Subsystem
     @Override
     public void initDefaultCommand() 
     {
-
+        setDefaultCommand(new DriveSecondaryWheels());
     }
 }

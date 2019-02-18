@@ -14,7 +14,7 @@ public class RunDriveTrain extends Command
 
     public RunDriveTrain() 
     {
-        //requires(Robot.drive);
+        requires(Robot.drive);
     }
 
     // Called just before this Command runs the first time
@@ -29,7 +29,7 @@ public class RunDriveTrain extends Command
     protected void execute() 
     {
         GenericHID controller = Robot.oi.getController();
-        //Robot.drive.arcadeDrive(controller.getY(Hand.kLeft), -controller.getX(Hand.kLeft));
+        Robot.drive.arcadeDrive(controller.getY(Hand.kLeft), -controller.getX(Hand.kLeft));
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -22,7 +22,6 @@ public class HatchPanelGrabber extends Subsystem
     public void initDefaultCommand() 
     {
 
-
     }
 
     public void extendPiston() 
@@ -47,7 +46,7 @@ public class HatchPanelGrabber extends Subsystem
 
     public boolean isOpen() 
     {
-        return pistonSolenoid.get();
+        return !reverseClaw.get();
     }
 
 }

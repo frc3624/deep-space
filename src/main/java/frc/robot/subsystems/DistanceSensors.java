@@ -23,7 +23,8 @@ public class DistanceSensors extends Subsystem {
     @Override
     public void periodic() 
     {
-
+        System.out.println("Front: " + frontSensor.getAverageValue());
+        System.out.println("Back: " + backSensor.getAverageValue());
     }
 
     public int getFront()

@@ -3,10 +3,12 @@ package frc.robot;
 import static frc.robot.RobotConstants.*;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.DistanceSensors;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.GearShifter;
 import frc.robot.subsystems.HatchPanelGrabber;
 import frc.robot.subsystems.SecondaryWheels;
 import frc.robot.subsystems.SecondaryWheelsPistons;
@@ -18,17 +20,17 @@ public class Robot extends TimedRobot {
     public static DistanceSensors distanceSensor = new DistanceSensors(FRONT_ULTRASONIC_SENSOR_ID,
             BACK_ULTRASONIC_SENSOR_ID);
 
-    // public static GearShifter gearShifter = new GearShifter(EVO_SHIFTER_CHANNEL);
     public static Drive drive = new Drive(DRIVE_LEFT_TALON_1_ID, DRIVE_RIGHT_TALON_1_ID, DRIVE_LEFT_TALON_2_ID,
             DRIVE_RIGHT_TALON_2_ID);
+    public static GearShifter gearShifter = new GearShifter(PNEUMATICS_CONTROL_MODULE_ID, EVO_SHIFTER_CHANNEL);
 
     public static HatchPanelGrabber hatchPanelGrabber = new HatchPanelGrabber(PNEUMATICS_CONTROL_MODULE_ID, 
                                                                                 PANEL_GRABBER_REVERSE_CLAW_CHANNEL,
                                                                                 PANEL_GRABBER_PISTON_CHANNEL);
     
-    public static SecondaryWheels secondaryWheels = new SecondaryWheels(SECONDARY_WHEELS_FRONT_ID);
-    public static SecondaryWheelsPistons frontPistons = new SecondaryWheelsPistons(PNEUMATICS_CONTROL_MODULE_ID, FRONT_PISTONS);
-    public static SecondaryWheelsPistons backPistons = new SecondaryWheelsPistons(PNEUMATICS_CONTROL_MODULE_ID, BACK_PISTONS);
+    public static SecondaryWheels secondaryWheels = new SecondaryWheels(SECONDARY_WHEELS_ID);
+    public static SecondaryWheelsPistons frontPistons = new SecondaryWheelsPistons(PNEUMATICS_CONTROL_MODULE_ID, FRONT_PISTONS, FRONT_PISTON_TOGGLE);
+    public static SecondaryWheelsPistons backPistons = new SecondaryWheelsPistons(PNEUMATICS_CONTROL_MODULE_ID, BACK_PISTONS, BACK_PISTON_TOGGLE);
 
     public static OI oi = new OI(0);
     Compressor compressor = new Compressor(14);
@@ -39,7 +41,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
-
+        compressor.setClosedLoopControl(true);
     }
 
     @Override
@@ -66,13 +68,13 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() 
     {
+        
     }
 
     @Override
     public void teleopPeriodic() 
     {
         commonAutoAndTeleopPeriodic();
-
     }
     
     /**
@@ -81,5 +83,6 @@ public class Robot extends TimedRobot {
     private void commonAutoAndTeleopPeriodic() 
     {
         Scheduler.getInstance().run();
+
     }
 }
