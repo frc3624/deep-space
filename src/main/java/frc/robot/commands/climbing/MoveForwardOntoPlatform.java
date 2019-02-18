@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.climbing;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -26,8 +26,6 @@ public class MoveForwardOntoPlatform extends Command {
     protected void end() {
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     @Override
     protected void interrupted() {
     }

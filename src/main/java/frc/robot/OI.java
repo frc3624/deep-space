@@ -9,18 +9,22 @@ import frc.robot.commands.InsertHatchPanel;
  * The operator interface class. Must be intitialized AFTER all subsystems.
  */
 public class OI 
-    {
+{
 
     
     private final GenericHID controller;
-    private final JoystickButton button1;
+    private final JoystickButton hatchGrabberToggle;
+    private final JoystickButton switchToHighGear, switchToLowGear;
 
     public OI(int controllerPort) 
     {
         controller = new XboxController(controllerPort);
-        
-        button1 = new JoystickButton(controller, 1);
-        button1.whenPressed(new InsertHatchPanel());
+
+        hatchGrabberToggle = new JoystickButton(controller, 1);
+        hatchGrabberToggle.whenPressed(new InsertHatchPanel());
+
+        switchToHighGear = new JoystickButton(controller, 5);
+        switchToLowGear = new JoystickButton(controller, 6);
     }
 
     public GenericHID getController() 

@@ -45,4 +45,9 @@ public class HatchPanelGrabber extends Subsystem
         reverseClaw.set(true);
     }
 
+    public boolean isOpen() 
+    {
+        return pistonSolenoid.get();
+    }
+
 }

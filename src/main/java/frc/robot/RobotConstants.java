@@ -30,5 +30,10 @@ public final class RobotConstants
     public static final int PANEL_GRABBER_REVERSE_CLAW_CHANNEL = 1;
     public static final int PANEL_GRABBER_PISTON_CHANNEL = 2;
 
+    // SecondaryWheels Subsystem
+    public static final int SECONDARY_WHEELS_FRONT_ID = -1;
+
     // SecondaryWheelsPistons Subsystem
+    public static final int FRONT_PISTONS = 5;
+    public static final int BACK_PISTONS = 6;
 }

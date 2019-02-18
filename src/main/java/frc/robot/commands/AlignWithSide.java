@@ -11,7 +11,7 @@ public class AlignWithSide extends Command
 
     public AlignWithSide() 
     {
-        requires(Robot.drive);
+        //requires(Robot.drive);
     }
 
     @Override
