@@ -17,10 +17,11 @@ public final class RobotConstants
     public static final int SECONDARY_WHEELS_BACK_WHEELS_ID = -1;
 
     //Ultrasonic Sensor
-    public static final int ULTRASONIC_SENSOR_ID = 0;
+    public static final int FRONT_ULTRASONIC_SENSOR_ID = 0;
+    public static final int BACK_ULTRASONIC_SENSOR_ID = 1;
 
     // Pneumatics - Used by multiple subsystems
-    public static final int PNEUMATICS_CONTROL_MODULE_ID = 13;
+    public static final int PNEUMATICS_CONTROL_MODULE_ID = 14;
 
     // GearShifter Subsystem
     public static final int EVO_SHIFTER_CHANNEL = 0;

@@ -12,7 +12,10 @@ public class HatchPanelGrabber extends Subsystem
     public HatchPanelGrabber(int pcmID, int reverseClawChannel, int pistonChannel)    
     {
         reverseClaw = new Solenoid(pcmID, reverseClawChannel);
+        openClaw();
+
         pistonSolenoid = new Solenoid(pcmID, pistonChannel);
+        retractPiston();
     }
 
     @Override
@@ -22,14 +25,14 @@ public class HatchPanelGrabber extends Subsystem
 
     }
 
-    public void push() 
+    public void extendPiston() 
     {
-        
+        pistonSolenoid.set(true);
     }
     
-    public void retract() 
+    public void retractPiston() 
     {
-
+        pistonSolenoid.set(false);
     }
 
     public void openClaw() 
