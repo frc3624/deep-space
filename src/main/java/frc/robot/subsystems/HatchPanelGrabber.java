@@ -24,12 +24,12 @@ public class HatchPanelGrabber extends Subsystem
 
     public void push() 
     {
-        
+        pistonSolenoid.set(true);
     }
     
     public void retract() 
     {
-
+        pistonSolenoid.set(false);
     }
 
     public void openClaw() 
@@ -40,6 +40,11 @@ public class HatchPanelGrabber extends Subsystem
     public void closeClaw() 
     {
         reverseClaw.set(true);
+    }
+
+    public boolean isOpen() 
+    {
+        return pistonSolenoid.get();
     }
 
 }

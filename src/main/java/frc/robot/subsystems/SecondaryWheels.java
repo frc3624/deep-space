@@ -19,11 +19,11 @@ public class SecondaryWheels extends Subsystem
         wheels = new WPI_TalonSRX(talonID);
     }
 
-    public void setWheels(double speed) 
+    public void set(double speed) 
     {
         wheels.set(speed);
     }
-    public void setWheels(ControlMode mode, double value) 
+    public void set(ControlMode mode, double value) 
     {
         wheels.set(mode, value);
     }

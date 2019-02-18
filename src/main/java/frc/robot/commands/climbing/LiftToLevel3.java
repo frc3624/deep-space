@@ -1,14 +1,17 @@
-package frc.robot.commands;
+package frc.robot.commands.climbing;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-public class LiftToLevel2 extends Command {
-    public LiftToLevel2() {
-
+public class LiftToLevel3 extends Command {
+    public LiftToLevel3() {
+        //requires(Robot.frontPistons);
+        //requires(Robot.backPistons);
     }
 
     @Override
     protected void initialize() {
+
     }
 
     @Override

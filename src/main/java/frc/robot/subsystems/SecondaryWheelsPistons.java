@@ -12,10 +12,10 @@ public class SecondaryWheelsPistons extends Subsystem
     private final Solenoid leftPiston;
     private final Solenoid rightPiston;
 
-    public SecondaryWheelsPistons(int pcmID, int leftPistonChannel, int rightPistonChannel)
+    public SecondaryWheelsPistons(int pcmID, int channel)
     {
-        leftPiston = new Solenoid(pcmID, leftPistonChannel);
-        rightPiston = new Solenoid(pcmID, rightPistonChannel);
+        leftPiston = new Solenoid(pcmID, channel);
+        rightPiston = new Solenoid(pcmID, channel);
     }
 
     public void extend() 

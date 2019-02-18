@@ -1,9 +1,10 @@
-package frc.robot.commands;
+package frc.robot.commands.climbing;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-public class LiftToLevel3 extends Command {
-    public LiftToLevel3() {
+public class MoveForwardOntoPlatform extends Command {
+    public MoveForwardOntoPlatform() {
 
     }
 
@@ -15,9 +16,10 @@ public class LiftToLevel3 extends Command {
     protected void execute() {
     }
 
+    private static final int TRIGGER_DISTANCE = Integer.MAX_VALUE;
     @Override
     protected boolean isFinished() {
-        return false;
+        return Robot.distanceSensor.get() < TRIGGER_DISTANCE;
     }
 
     @Override

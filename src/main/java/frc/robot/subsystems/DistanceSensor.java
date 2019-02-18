@@ -13,13 +13,6 @@ public class DistanceSensor extends Subsystem {
 
     }
 
-<<<<<<< HEAD
-  @Override
-  public void periodic() 
-  {
-    
-  }
-=======
     private final AnalogInput ultrasonicSensor = new AnalogInput(0);
 
     @Override
@@ -30,5 +23,4 @@ public class DistanceSensor extends Subsystem {
     public int get() {
         return ultrasonicSensor.getAverageValue();
     }
->>>>>>> fda95249e39f027c6e55a1d686f36a63d4878da3
 }
