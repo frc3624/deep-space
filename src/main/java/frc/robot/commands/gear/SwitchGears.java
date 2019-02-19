@@ -9,17 +9,23 @@ package frc.robot.commands.gear;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
-import frc.robot.subsystems.GearShifter.GearMode;
 
-public class SwitchToHighGear extends InstantCommand {
-  public SwitchToHighGear() {
+/**
+ * Add your docs here.
+ */
+public class SwitchGears extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public SwitchGears() {
+    super();
     requires(Robot.gearShifter);
   }
 
-  // Called just before this Command runs the first time
+  // Called once when the command executes
   @Override
   protected void initialize() {
-    System.out.println("high gear");
-    Robot.gearShifter.setGearMode(GearMode.HIGH);
+      Robot.gearShifter.switchGears();
   }
+
 }

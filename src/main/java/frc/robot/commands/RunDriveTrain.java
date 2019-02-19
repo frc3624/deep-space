@@ -10,11 +10,12 @@ import frc.robot.Robot;
  */
 public class RunDriveTrain extends Command 
 {
+    private final GenericHID controller;
 
-
-    public RunDriveTrain() 
+    public RunDriveTrain(GenericHID controller) 
     {
         requires(Robot.drive);
+        this.controller = controller;
     }
 
     // Called just before this Command runs the first time
@@ -28,7 +29,6 @@ public class RunDriveTrain extends Command
     @Override
     protected void execute() 
     {
-        GenericHID controller = Robot.oi.getController();
         Robot.drive.arcadeDrive(controller.getY(Hand.kLeft), -controller.getX(Hand.kLeft));
     }
 

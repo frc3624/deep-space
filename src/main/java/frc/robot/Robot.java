@@ -1,11 +1,30 @@
 package frc.robot;
 
-import static frc.robot.RobotConstants.*;
+import static frc.robot.RobotConstants.BACK_PISTONS;
+import static frc.robot.RobotConstants.BACK_PISTON_TOGGLE;
+import static frc.robot.RobotConstants.BACK_ULTRASONIC_SENSOR_ID;
+import static frc.robot.RobotConstants.DRIVE_LEFT_TALON_1_ID;
+import static frc.robot.RobotConstants.DRIVE_LEFT_TALON_2_ID;
+import static frc.robot.RobotConstants.DRIVE_RIGHT_TALON_1_ID;
+import static frc.robot.RobotConstants.DRIVE_RIGHT_TALON_2_ID;
+import static frc.robot.RobotConstants.EVO_SHIFTER_CHANNEL;
+import static frc.robot.RobotConstants.FRONT_PISTONS;
+import static frc.robot.RobotConstants.FRONT_PISTON_TOGGLE;
+import static frc.robot.RobotConstants.FRONT_ULTRASONIC_SENSOR_ID;
+import static frc.robot.RobotConstants.PANEL_GRABBER_PISTON_CHANNEL;
+import static frc.robot.RobotConstants.PANEL_GRABBER_REVERSE_CLAW_CHANNEL;
+import static frc.robot.RobotConstants.PNEUMATICS_CONTROL_MODULE_ID;
+import static frc.robot.RobotConstants.SECONDARY_WHEELS_ID;
+
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.oi.OI;
 import frc.robot.subsystems.DistanceSensors;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.GearShifter;
@@ -33,10 +52,16 @@ public class Robot extends TimedRobot {
     public static SecondaryWheelsPistons backPistons = new SecondaryWheelsPistons(PNEUMATICS_CONTROL_MODULE_ID, BACK_PISTONS, BACK_PISTON_TOGGLE);
 
     public static OI oi = new OI(0);
+
+    public static AHRS ahrs;
     Compressor compressor = new Compressor(14);
     @Override
     public void robotInit() {
         compressor.start();
+
+        ahrs = new AHRS(SerialPort.Port.kUSB);
+        //ahrs = new AHRS(SerialPort.Port.kMXP, SerialDataType.kProcessedData, (byte)50);
+        ahrs.enableLogging(true);
     }
 
     @Override
@@ -83,6 +108,5 @@ public class Robot extends TimedRobot {
     private void commonAutoAndTeleopPeriodic() 
     {
         Scheduler.getInstance().run();
-
     }
 }

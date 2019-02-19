@@ -10,12 +10,12 @@ public class SecondaryWheelsPistons extends Subsystem
 {
 
     private final Solenoid mainPiston;
-    private final Solenoid togglePiston;
+    private final Solenoid secondValve;
 
     public SecondaryWheelsPistons(int pcmID, int mainChannel, int toggleChannel)
     {
         mainPiston = new Solenoid(pcmID, mainChannel);
-        togglePiston = new Solenoid(pcmID, toggleChannel);
+        secondValve = new Solenoid(pcmID, toggleChannel);
     }
 
     public void extend() 
@@ -28,11 +28,11 @@ public class SecondaryWheelsPistons extends Subsystem
         mainPiston.set(false);
     }
 
-    public void topThing() {
-        togglePiston.set(true);
+    public void enableSecondValve() {
+        secondValve.set(true);
     }
-    public void bottomThing() {
-        togglePiston.set(false);
+    public void disableSecondValve() {
+        secondValve.set(false);
     }
 
     @Override

@@ -5,21 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.gear;
+package frc.robot.commands.climbing;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
-import frc.robot.subsystems.GearShifter.GearMode;
 
-public class SwitchToHighGear extends InstantCommand {
-  public SwitchToHighGear() {
-    requires(Robot.gearShifter);
+/**
+ * Add your docs here.
+ */
+public class RetractFrontPistonLevel2 extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public RetractFrontPistonLevel2() 
+  {
+    requires(Robot.frontPistons);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-    System.out.println("high gear");
-    Robot.gearShifter.setGearMode(GearMode.HIGH);
+  protected void initialize() 
+  {
+    Robot.frontPistons.retract();
   }
 }

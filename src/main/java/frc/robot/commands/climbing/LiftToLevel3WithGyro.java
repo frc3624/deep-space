@@ -5,29 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.climbing;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
-public class ExtendAndRetractHatchGrabberPiston extends TimedCommand {
-  /**
-   * Add your docs here.
-   */
-  public ExtendAndRetractHatchGrabberPiston(double timeout) {
-    super(timeout);
-    requires(Robot.hatchPanelGrabber);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class LiftToLevel3WithGyro extends Command {
+  public LiftToLevel3WithGyro() {
+    requires(Robot.frontPistons);
+    requires(Robot.backPistons);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.hatchPanelGrabber.extendPiston();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -35,10 +26,15 @@ public class ExtendAndRetractHatchGrabberPiston extends TimedCommand {
   protected void execute() {
   }
 
-  // Called once after timeout
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected boolean isFinished() {
+    return false;
+  }
+
+  // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.hatchPanelGrabber.retractPiston();
   }
 
   // Called when another command which requires one or more of the same

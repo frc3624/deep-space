@@ -7,53 +7,39 @@
 
 package frc.robot.commands.climbing;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
-public class LiftToLevel3 extends TimedCommand 
-{
-  /**
-   * Add your docs here.
-   */
-  public LiftToLevel3(double timeout) 
-  {
-    super(timeout);
-    requires(Robot.frontPistons);
-    requires(Robot.backPistons);
+public class DriveOntoPlatform extends Command {
+  public DriveOntoPlatform() {
+    requires(Robot.secondaryWheels);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() 
-  {
-    System.out.println("First step");
-    Robot.frontPistons.extend();
-    Robot.backPistons.extend();
+  protected void initialize() {
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() 
-  {
+  protected void execute() {
+    Robot.secondaryWheels.set(1);
   }
 
-  // Called once after timeout
+  // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected void end() 
-  {
-    System.out.println("Second step");
-    Robot.frontPistons.enableSecondValve();
-    Robot.frontPistons.enableSecondValve();
+  protected boolean isFinished() {
+    return Robot.distanceSensor.backIsOnPlatform();
+  }
+
+  // Called once after isFinished returns true
+  @Override
+  protected void end() {
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() 
-  {
-    
+  protected void interrupted() {
   }
 }

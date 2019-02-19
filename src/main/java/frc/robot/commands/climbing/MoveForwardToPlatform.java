@@ -1,47 +1,39 @@
-package frc.robot.commands;
+package frc.robot.commands.climbing;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * An example command.  You can replace me with your own command.
- */
-public class AlignWithSide extends Command 
+public class MoveForwardToPlatform extends Command 
 {
-
-    public AlignWithSide() 
+    public MoveForwardToPlatform() 
     {
-        //requires(Robot.drive);
+        requires(Robot.secondaryWheels);
     }
 
     @Override
     protected void initialize() 
     {
-
     }
 
     @Override
     protected void execute() 
     {
-
+        Robot.secondaryWheels.set(1);
     }
 
     @Override
     protected boolean isFinished() 
     {
-        return Robot.vision.hasTargetVisual() && Robot.vision.isHorizontallyAligned() && Robot.vision.isVerticallyAligned();
+        return Robot.distanceSensor.frontIsOnPlatform();
     }
 
     @Override
     protected void end() 
     {
-
     }
 
     @Override
     protected void interrupted() 
     {
-
     }
-
 }

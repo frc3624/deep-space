@@ -21,6 +21,6 @@ public class SwitchToLowGear extends InstantCommand {
   @Override
   protected void initialize() {
     System.out.println("low gear");
-    Robot.gearShifter.setGear(GearMode.LOW);
+    Robot.gearShifter.setGearMode(GearMode.LOW);
   }
 }

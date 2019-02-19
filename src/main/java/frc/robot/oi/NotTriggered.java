@@ -5,21 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.gear;
+package frc.robot.oi;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
-import frc.robot.Robot;
-import frc.robot.subsystems.GearShifter.GearMode;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
-public class SwitchToHighGear extends InstantCommand {
-  public SwitchToHighGear() {
-    requires(Robot.gearShifter);
+/**
+ * Returns true when another trigger is NOT triggered
+ */
+public class NotTriggered extends Trigger 
+{
+  private final Trigger trigger;
+
+  public NotTriggered(Trigger trigger)
+  {
+    this.trigger = trigger;
   }
 
-  // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-    System.out.println("high gear");
-    Robot.gearShifter.setGearMode(GearMode.HIGH);
+  public boolean get() 
+  {
+    return !trigger.get();
   }
 }

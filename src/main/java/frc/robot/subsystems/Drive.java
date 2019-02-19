@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Robot;
 import frc.robot.commands.RunDriveTrain;
 
 public class Drive extends Subsystem
@@ -31,7 +32,7 @@ public class Drive extends Subsystem
     @Override
     public void initDefaultCommand() 
     {
-        setDefaultCommand(new RunDriveTrain());
+        setDefaultCommand(new RunDriveTrain(Robot.oi.getController()));
     }
 
     public void arcadeDrive(double xSpeed, double zRotation) 
