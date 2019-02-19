@@ -13,6 +13,9 @@ import frc.robot.commands.DriveSecondaryWheels;
 public class SecondaryWheels extends Subsystem 
 {
 
+    public final static double KV_RATING = 50; // RPM/V
+    public final static double WHEEL_RADIUS = 4; // inches
+
     private final WPI_TalonSRX wheels;
 
     public SecondaryWheels(int talonID) 
