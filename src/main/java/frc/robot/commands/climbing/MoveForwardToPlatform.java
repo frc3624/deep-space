@@ -29,7 +29,7 @@ public class MoveForwardToPlatform extends Command
     {
         Robot.secondaryWheels.set(speed);
         double smallMotorRPM = DriverStation.getInstance().getBatteryVoltage() * SecondaryWheels.KV_RATING * speed;
-        double speed = smallMotorRPM * Math.PI * SecondaryWheels.WHEEL_RADIUS * 2;
+        double speed = smallMotorRPM * Math.PI * SecondaryWheels.WHEEL_CIRCUMFERENCE;
         double sign = this.speed / (this.speed == 0 ? 1 : Math.abs(speed));
         Robot.drive.set(ControlMode.Velocity, speed * sign);
     }
