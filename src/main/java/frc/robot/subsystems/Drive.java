@@ -32,7 +32,7 @@ public class Drive extends Subsystem
     @Override
     public void initDefaultCommand() 
     {
-        setDefaultCommand(new RunDriveTrain(Robot.oi.getController()));
+        setDefaultCommand(new RunDriveTrain(Robot.oi.getDriveController()));
     }
 
     public void arcadeDrive(double xSpeed, double zRotation) 

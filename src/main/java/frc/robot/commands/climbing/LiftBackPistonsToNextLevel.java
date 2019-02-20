@@ -13,19 +13,22 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class RetractFrontPistonLevel2 extends InstantCommand {
+public class LiftBackPistonsToNextLevel extends InstantCommand {
   /**
    * Add your docs here.
    */
-  public RetractFrontPistonLevel2() 
-  {
-    requires(Robot.frontPistons);
+  public LiftBackPistonsToNextLevel() {
+    super();
+    requires(Robot.backPistons);
   }
 
-  // Called just before this Command runs the first time
+  // Called once when the command executes
   @Override
-  protected void initialize() 
-  {
-    Robot.frontPistons.disableLevel1Valve();
+  protected void initialize() {
+    System.out.println("Lifting Back Level: " + Robot.backPistons.getCurrentLevel());
+    Robot.backPistons.nextLevel();
+    System.out.println("New Back Level: " + Robot.backPistons.getCurrentLevel());
+
   }
+
 }

@@ -3,9 +3,11 @@ package frc.robot.oi;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.climbing.LiftToLevel2;
-import frc.robot.commands.climbing.RetractBackPistonLevel2;
-import frc.robot.commands.climbing.RetractFrontPistonLevel2;
+import frc.robot.commands.climbing.LiftBackPistonsToNextLevel;
+import frc.robot.commands.climbing.LiftFrontPistonsToNextLevel;
+import frc.robot.commands.climbing.RetractBackPistonsToPreviousLevel;
+import frc.robot.commands.climbing.RetractFrontPistonsToPreviousLevel;
+import frc.robot.commands.climbing.RetractLiftingPistons;
 import frc.robot.commands.gear.SwitchGears;
 import frc.robot.commands.hatch_panel.InsertHatchPanel;
 
@@ -13,58 +15,58 @@ import frc.robot.commands.hatch_panel.InsertHatchPanel;
  * The operator interface class. Must be intitialized AFTER all subsystems.
  */
 public class OI {
+    public static final int A_BUTTON = 1;
+    public static final int B_BUTTON = 2;
+    public static final int X_BUTTON = 3;
+    public static final int Y_BUTTON = 4;
+    public static final int LEFT_BUMPER = 5;
+    public static final int RIGHT_BUMPER = 6;
 
-    private  GenericHID controller;
-    private  JoystickButton switchGearsButton;
-    private  JoystickButton liftToLevel2Button, liftToLevel3Button;
-    private JoystickButton retractFrontPistonsButton, retractBackPistonsButton;
-    private  JoystickButton retractLiftingPistonsButton;
-    private  JoystickButton insertHatchPanel;
-    private  XboxTriggerThreshold enableBackLiftersTrigger, enableFrontLiftersTrigger;
-    private  NotTriggered disableBackLiftersTrigger, disableFrontLiftersTrigger;
+    private final XboxController driveController;
+    private final XboxController climbController;  
 
-    public OI(int controllerPort) 
+    private final JoystickButton placeHatchPanelButton;
+    private final JoystickButton switchGearButton;
+
+    private final JoystickButton liftFrontPistonButton, retractFrontPistonButton;
+    private final JoystickButton liftBackPistonButton, retractBackPistonButton;
+    private final JoystickButton retractBothLiftersButton;
+    public OI(int driveControllerPort, int climbControllerPort) 
     {
-        this.controller = new XboxController(controllerPort);
+        this.driveController = new XboxController(driveControllerPort);
+        this.climbController = new XboxController(climbControllerPort);
 
-        insertHatchPanel = new JoystickButton(controller, 1);
-        insertHatchPanel.whenPressed(new InsertHatchPanel());
-
-        // liftToLevel3Button = new JoystickButton(controller, 2);
-        // liftToLevel3Button.whenPressed(new LiftToLevel3(0));
-        // liftToLevel2Button = new JoystickButton(controller, 3);
-        // liftToLevel2Button.whenPressed(new ClimbToLevel2());
-        liftToLevel2Button = new JoystickButton(controller, 3);
-        liftToLevel2Button.whenPressed(new LiftToLevel2());
-
-        retractFrontPistonsButton = new JoystickButton(controller, 4);
-        retractFrontPistonsButton.whenPressed(new RetractFrontPistonLevel2());
-
-        retractBackPistonsButton = new JoystickButton(controller, 2);
-        retractBackPistonsButton.whenPressed(new RetractBackPistonLevel2());
-
-        // retractLiftingPistonsButton = new JoystickButton(controller, 4);
-        // retractLiftingPistonsButton.whenPressed(new RetractLiftingPistons());
-
-        switchGearsButton = new JoystickButton(controller, 6);
-        switchGearsButton.whenPressed(new SwitchGears());
+        //Drive Controller Mappings
+        placeHatchPanelButton = new JoystickButton(driveController, A_BUTTON);
+        placeHatchPanelButton.whenPressed(new InsertHatchPanel());
         
-        //UGLY - Change later if we have the time. I now understand why previous years' code looks awful.
-        // Command runBackLifter = new RunBackLifter();
-        // enableBackLiftersTrigger = new XboxTriggerThreshold((XboxController) controller, Hand.kLeft);
-        // enableBackLiftersTrigger.whenActive(runBackLifter);
-        // disableBackLiftersTrigger = new NotTriggered(enableBackLiftersTrigger);
-        // disableBackLiftersTrigger.cancelWhenActive(runBackLifter);
+        switchGearButton = new JoystickButton(driveController, RIGHT_BUMPER);
+        switchGearButton.whenPressed(new SwitchGears());
 
-        // Command runFrontLifter = new RunFrontLifter();
-        // enableFrontLiftersTrigger = new XboxTriggerThreshold((XboxController) controller, Hand.kRight);
-        // enableFrontLiftersTrigger.whenActive(runFrontLifter);
-        // disableFrontLiftersTrigger = new NotTriggered(enableFrontLiftersTrigger);
-        // disableFrontLiftersTrigger.cancelWhenActive(runFrontLifter);
+        //Climb Controller Mappings
+        retractFrontPistonButton = new JoystickButton(climbController, X_BUTTON);
+        retractFrontPistonButton.whenPressed(new RetractFrontPistonsToPreviousLevel());
+
+        liftFrontPistonButton = new JoystickButton(climbController, Y_BUTTON);
+        liftFrontPistonButton.whenPressed(new LiftFrontPistonsToNextLevel());
+
+        retractBackPistonButton = new JoystickButton(climbController, A_BUTTON);
+        retractBackPistonButton.whenPressed(new RetractBackPistonsToPreviousLevel());
+
+        liftBackPistonButton = new JoystickButton(climbController, B_BUTTON);
+        liftBackPistonButton.whenPressed(new LiftBackPistonsToNextLevel());
+
+        retractBothLiftersButton = new JoystickButton(climbController, LEFT_BUMPER); //FALLBACK/JULIANA Button
+        retractBothLiftersButton.whenPressed(new RetractLiftingPistons());
     }
 
-    public GenericHID getController() 
+    public GenericHID getDriveController() 
     {
-        return controller;
+        return driveController;
+    }
+
+    public GenericHID getClimbController() 
+    {
+        return climbController;
     }
 }

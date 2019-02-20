@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.commands.DriveSecondaryWheels;
 
 /**
@@ -25,11 +26,16 @@ public class SecondaryWheels extends Subsystem
 
     public void set(double speed) 
     {
-        wheels.set(speed);
+        set(ControlMode.Current, speed);
     }
+
     public void set(ControlMode mode, double value) 
     {
-        wheels.set(mode, value);
+        //This if statement is not working. Fix at competition?
+        if (Robot.backPistons.getCurrentLevel() != 0)
+        {
+            wheels.set(mode, value);
+        }
     }
 
     @Override

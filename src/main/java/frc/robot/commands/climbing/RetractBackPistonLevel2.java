@@ -27,7 +27,7 @@ public class RetractBackPistonLevel2 extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.backPistons.retract();
+    Robot.backPistons.disableLevel1Valve();
   }
 
 }

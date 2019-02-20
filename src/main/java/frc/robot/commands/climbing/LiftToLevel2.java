@@ -1,42 +1,34 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
 package frc.robot.commands.climbing;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.*;
-public class LiftToLevel2 extends Command 
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
+
+/**
+ * Add your docs here.
+ */
+public class LiftToLevel2 extends InstantCommand 
 {
-    public LiftToLevel2() 
-    {
-        requires(Robot.frontPistons);
-        requires(Robot.backPistons);
-    }
+  /**
+   * Add your docs here.
+   */
+  public LiftToLevel2() 
+  {
+    requires(Robot.frontPistons);
+    requires(Robot.backPistons);
+  }
 
-    @Override
-    protected void initialize() 
-    {
-        Robot.frontPistons.extend();
-        Robot.frontPistons.disableSecondValve();
-        Robot.backPistons.extend();
-        Robot.backPistons.disableSecondValve();
-    }
-
-    @Override
-    protected void execute() 
-    {
-    }
-
-    @Override
-    protected boolean isFinished() 
-    {
-        return true; //We may make this an instant command in the future instead
-    }
-
-    @Override
-    protected void end() 
-    {
-    }
-
-    @Override
-    protected void interrupted() 
-    {
-    }
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() 
+  {
+    Robot.frontPistons.enableLevel2Valve();
+    Robot.backPistons.enableLevel2Valve();
+  }
 }

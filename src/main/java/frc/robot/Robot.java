@@ -48,16 +48,18 @@ public class Robot extends TimedRobot {
                                                                                 PANEL_GRABBER_PISTON_CHANNEL);
     
     public static SecondaryWheels secondaryWheels = new SecondaryWheels(SECONDARY_WHEELS_ID);
+    
     public static SecondaryWheelsPistons frontPistons = new SecondaryWheelsPistons(PNEUMATICS_CONTROL_MODULE_ID, FRONT_PISTONS, FRONT_PISTON_TOGGLE);
     public static SecondaryWheelsPistons backPistons = new SecondaryWheelsPistons(PNEUMATICS_CONTROL_MODULE_ID, BACK_PISTONS, BACK_PISTON_TOGGLE);
+    public static int currentLevel = 0;
 
-    public static OI oi = new OI(0);
+    public static OI oi = new OI(0, 1);
 
     public static AHRS ahrs;
-    Compressor compressor = new Compressor(14);
+    Compressor mainCompressor = new Compressor(14);
     @Override
     public void robotInit() {
-        compressor.start();
+        mainCompressor.start();
 
         ahrs = new AHRS(SerialPort.Port.kUSB);
         //ahrs = new AHRS(SerialPort.Port.kMXP, SerialDataType.kProcessedData, (byte)50);
@@ -66,7 +68,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
-        compressor.setClosedLoopControl(true);
+        mainCompressor.setClosedLoopControl(true);
     }
 
     @Override
@@ -107,6 +109,9 @@ public class Robot extends TimedRobot {
      */
     private void commonAutoAndTeleopPeriodic() 
     {
+        SmartDashboard.putNumber("Front Pistons Level:", frontPistons.getCurrentLevel());
+        SmartDashboard.putNumber("Back Pistons Level:", backPistons.getCurrentLevel());
+        SmartDashboard.putString("Beak Position:", (hatchPanelGrabber.isOpen()) ? "Open" : "Closed");
         Scheduler.getInstance().run();
     }
 }

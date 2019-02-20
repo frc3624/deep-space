@@ -10,7 +10,7 @@ public class ClimbToLevel2 extends CommandGroup
 	 */
 	public ClimbToLevel2() 
 	{
-		addSequential(new LiftToLevel2());
+		addSequential(new LiftToLevel1());
 		addSequential(new WaitCommand("Wait for Lift", 5));
 		addSequential(new RetractFrontPistonLevel2());
 		addSequential(new WaitCommand("Wait for retracting front pistons", 2));
