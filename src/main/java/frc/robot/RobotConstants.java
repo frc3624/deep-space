@@ -7,9 +7,9 @@ public final class RobotConstants
 
     // Drive Subsystem
     public static final int DRIVE_LEFT_TALON_1_ID = 1;
-    public static final int DRIVE_RIGHT_TALON_1_ID = 2;
+    public static final int DRIVE_LEFT_TALON_2_ID = 2;
 
-    public static final int DRIVE_LEFT_TALON_2_ID = 7;
+    public static final int DRIVE_RIGHT_TALON_1_ID = 7;
     public static final int DRIVE_RIGHT_TALON_2_ID = 8;
 
     // SecondaryWheels Subsystem
