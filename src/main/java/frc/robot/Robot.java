@@ -32,6 +32,7 @@ import frc.robot.subsystems.HatchPanelGrabber;
 import frc.robot.subsystems.SecondaryWheels;
 import frc.robot.subsystems.SecondaryWheelsPistons;
 import frc.robot.subsystems.Vision;
+import frc.robot.subsystems.GearShifter.GearMode;
 
 public class Robot extends TimedRobot {
 
@@ -39,7 +40,7 @@ public class Robot extends TimedRobot {
     public static DistanceSensors distanceSensor = new DistanceSensors(FRONT_ULTRASONIC_SENSOR_ID,
             BACK_ULTRASONIC_SENSOR_ID);
 
-    public static Drive drive = new Drive(DRIVE_LEFT_TALON_1_ID, DRIVE_RIGHT_TALON_1_ID, DRIVE_LEFT_TALON_2_ID,
+    public static Drive drive = new Drive(DRIVE_LEFT_TALON_1_ID, DRIVE_LEFT_TALON_2_ID, DRIVE_RIGHT_TALON_1_ID,
             DRIVE_RIGHT_TALON_2_ID);
     public static GearShifter gearShifter = new GearShifter(PNEUMATICS_CONTROL_MODULE_ID, EVO_SHIFTER_CHANNEL);
 
@@ -53,7 +54,7 @@ public class Robot extends TimedRobot {
     public static SecondaryWheelsPistons backPistons = new SecondaryWheelsPistons(PNEUMATICS_CONTROL_MODULE_ID, BACK_PISTONS, BACK_PISTON_TOGGLE);
     public static int currentLevel = 0;
 
-    public static OI oi = new OI(0, 1);
+    public static OI oi = new OI(0/*, 1*/);
 
     public static AHRS ahrs;
     Compressor mainCompressor = new Compressor(14);
@@ -73,7 +74,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
-
+        resetAllSolenoids();
     }
 
     @Override
@@ -81,9 +82,21 @@ public class Robot extends TimedRobot {
 
     }
 
-    @Override
-    public void autonomousInit() {
+    public void resetAllSolenoids()
+    {
+        frontPistons.fullyRetract();
+        backPistons.fullyRetract();
+        gearShifter.setGearMode(GearMode.LOW);
+        hatchPanelGrabber.retractPiston();
+        hatchPanelGrabber.openClaw();
+    }
 
+    @Override
+    public void autonomousInit() 
+    {
+        resetAllSolenoids();
+        drive.resetLeftReading();
+        drive.resetRightReading();
     }
 
     @Override
@@ -95,7 +108,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() 
     {
-        
+        resetAllSolenoids();
     }
 
     @Override
@@ -109,9 +122,11 @@ public class Robot extends TimedRobot {
      */
     private void commonAutoAndTeleopPeriodic() 
     {
-        SmartDashboard.putNumber("Front Pistons Level:", frontPistons.getCurrentLevel());
-        SmartDashboard.putNumber("Back Pistons Level:", backPistons.getCurrentLevel());
+        SmartDashboard.putString("Front Pistons Level:", Integer.toString(frontPistons.getCurrentLevel()));
+        SmartDashboard.putString("Back Pistons Level:", Integer.toString(backPistons.getCurrentLevel()));
         SmartDashboard.putString("Beak Position:", (hatchPanelGrabber.isOpen()) ? "Open" : "Closed");
+        SmartDashboard.putString("Left Encoder Reading:", Integer.toString(drive.getLeftReading()));
+        SmartDashboard.putString("Right Encoder Reading:", Integer.toString(drive.getRightReading()));
         Scheduler.getInstance().run();
     }
 }

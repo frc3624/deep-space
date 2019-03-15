@@ -12,9 +12,17 @@ public class DistanceSensors extends Subsystem {
     public DistanceSensors(int frontDistanceSensorID, int backDistanceSensorID)
     {
         frontSensor = new AnalogInput(frontDistanceSensorID);
+        frontSensor.setAccumulatorInitialValue(0);
+
         backSensor = new AnalogInput(backDistanceSensorID);
+        backSensor.setAccumulatorInitialValue(0);
     }
 
+    public void resetSensors()
+    {
+        frontSensor.initAccumulator();
+        backSensor.initAccumulator();
+    }
     @Override
     public void initDefaultCommand() 
     {

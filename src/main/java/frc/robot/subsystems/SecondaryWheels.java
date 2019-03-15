@@ -26,12 +26,14 @@ public class SecondaryWheels extends Subsystem
 
     public void set(double speed) 
     {
-        set(ControlMode.Current, speed);
+        if (Robot.backPistons.getCurrentLevel() != 0)
+        {
+            wheels.set(speed);
+        }
     }
 
     public void set(ControlMode mode, double value) 
     {
-        //This if statement is not working. Fix at competition?
         if (Robot.backPistons.getCurrentLevel() != 0)
         {
             wheels.set(mode, value);

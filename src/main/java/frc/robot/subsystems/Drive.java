@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
@@ -11,23 +13,41 @@ import frc.robot.commands.RunDriveTrain;
 public class Drive extends Subsystem
 {
     private final WPI_TalonSRX leftTalon1;
-    private final WPI_TalonSRX rightTalon1;
-    private final DifferentialDrive differentialDrive1;
-
     private final WPI_TalonSRX leftTalon2;
-    private final WPI_TalonSRX rightTalon2;
-    private final DifferentialDrive differentialDrive2;
+    private final SpeedControllerGroup leftSpeedControllerGroup;
 
-    public Drive(int leftTalon1ID, int rightTalon1ID, int leftTalon2ID, int rightTalon2ID) 
+    private final WPI_TalonSRX rightTalon1;
+    private final WPI_TalonSRX rightTalon2;
+    private final SpeedControllerGroup rightSpeedControllerGroup;
+
+    private final DifferentialDrive differentialDrive;
+
+    public Drive(int leftTalon1ID, int leftTalon2ID, int rightTalon1ID, int rightTalon2ID) 
     {
         leftTalon1 = new WPI_TalonSRX(leftTalon1ID);
-        rightTalon1 = new WPI_TalonSRX(rightTalon1ID);
-        differentialDrive1 = new DifferentialDrive(leftTalon1, rightTalon1);
-
         leftTalon2 = new WPI_TalonSRX(leftTalon2ID);
+        leftSpeedControllerGroup = new SpeedControllerGroup(leftTalon1, leftTalon2);
+        // leftSpeedControllerGroup = new SpeedControllerGroup(leftTalon2);
+        // leftSpeedControllerGroup = new SpeedControllerGroup(leftTalon1);
+
+        rightTalon1 = new WPI_TalonSRX(rightTalon1ID);
         rightTalon2 = new WPI_TalonSRX(rightTalon2ID);
-        differentialDrive2 = new DifferentialDrive(leftTalon2, rightTalon2);
+        rightSpeedControllerGroup = new SpeedControllerGroup(rightTalon1, rightTalon2);
+        // rightSpeedControllerGroup = new SpeedControllerGroup(rightTalon2);
+        // rightSpeedControllerGroup = new SpeedControllerGroup(rightTalon1);
+
+
+        differentialDrive = new DifferentialDrive(leftSpeedControllerGroup, rightSpeedControllerGroup);
+
+        leftTalon1.configContinuousCurrentLimit(30, 0);
+        leftTalon2.configContinuousCurrentLimit(30, 0);
+        rightTalon1.configContinuousCurrentLimit(30, 0);
+        rightTalon2.configContinuousCurrentLimit(30, 0);
+
+        //rightTalon1.setInverted(true);
+        //leftTalon1.setInverted(true);
     }
+
 
     @Override
     public void initDefaultCommand() 
@@ -37,8 +57,7 @@ public class Drive extends Subsystem
 
     public void arcadeDrive(double xSpeed, double zRotation) 
     {
-        differentialDrive1.arcadeDrive(xSpeed, zRotation);
-        differentialDrive2.arcadeDrive(xSpeed, zRotation);
+        differentialDrive.arcadeDrive(xSpeed, zRotation);
     }
 
     public void set(double speed) 
@@ -77,4 +96,23 @@ public class Drive extends Subsystem
         rightTalon2.set(mode, value);
     }
 
+    public int getLeftReading()
+    {
+        return leftTalon1.getSelectedSensorPosition();
+    }
+
+    public int getRightReading()
+    {
+        return rightTalon1.getSelectedSensorPosition();
+    }
+
+    public void resetLeftReading()
+    {
+        leftTalon1.setSelectedSensorPosition(0);
+    }
+
+    public void resetRightReading()
+    {
+        rightTalon1.setSelectedSensorPosition(0);
+    }
 }
