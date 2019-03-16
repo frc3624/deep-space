@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class GearShifter extends Subsystem {
     public enum GearMode
     {
-        HIGH(true),
-        LOW(false);
+        HIGH(false),
+        LOW(true);
 
         private boolean solenoidState;
 
@@ -24,6 +24,12 @@ public class GearShifter extends Subsystem {
 
         public GearMode getOppositeMode() {
             return (this == HIGH) ? LOW : HIGH;
+        }
+
+        @Override
+        public String toString()
+        {
+            return (this == HIGH) ? "HIGH" : "LOW";
         }
     }
 

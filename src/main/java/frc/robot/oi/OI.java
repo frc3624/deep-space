@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
+import frc.robot.commands.TurnOnUSBCamera;
 import frc.robot.commands.climbing.LiftBackPistonsToNextLevel;
 import frc.robot.commands.climbing.LiftFrontPistonsToNextLevel;
 import frc.robot.commands.climbing.RetractBackPistonsToPreviousLevel;
@@ -33,6 +34,7 @@ public class OI {
     private JoystickButton liftFrontPistonButton, retractFrontPistonButton;
     private JoystickButton liftBackPistonButton, retractBackPistonButton;
     private JoystickButton retractBothLiftersButton;
+    private Trigger setUpCameraButton;
 
     public OI(int driveControllerPort/*, int climbControllerPort*/) 
     {
@@ -61,12 +63,11 @@ public class OI {
 
         retractBothLiftersButton = new JoystickButton(driveController, LEFT_BUMPER); //FALLBACK/JULIANA Button
         retractBothLiftersButton.whenPressed(new RetractLiftingPistons());
+    
+        setUpCameraButton = new XboxTriggerThreshold(driveController, Hand.kLeft);
+        setUpCameraButton.whenActive(new TurnOnUSBCamera());
     }
 
-    public void setDriveMode()
-    {
-        
-    }
     public GenericHID getDriveController() 
     {
         return driveController;

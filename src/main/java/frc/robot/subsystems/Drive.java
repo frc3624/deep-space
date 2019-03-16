@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
@@ -27,28 +26,27 @@ public class Drive extends Subsystem
         leftTalon1 = new WPI_TalonSRX(leftTalon1ID);
         leftTalon2 = new WPI_TalonSRX(leftTalon2ID);
         leftSpeedControllerGroup = new SpeedControllerGroup(leftTalon1, leftTalon2);
-        // leftSpeedControllerGroup = new SpeedControllerGroup(leftTalon2);
-        // leftSpeedControllerGroup = new SpeedControllerGroup(leftTalon1);
 
         rightTalon1 = new WPI_TalonSRX(rightTalon1ID);
         rightTalon2 = new WPI_TalonSRX(rightTalon2ID);
         rightSpeedControllerGroup = new SpeedControllerGroup(rightTalon1, rightTalon2);
-        // rightSpeedControllerGroup = new SpeedControllerGroup(rightTalon2);
-        // rightSpeedControllerGroup = new SpeedControllerGroup(rightTalon1);
-
 
         differentialDrive = new DifferentialDrive(leftSpeedControllerGroup, rightSpeedControllerGroup);
 
-        leftTalon1.configContinuousCurrentLimit(30, 0);
-        leftTalon2.configContinuousCurrentLimit(30, 0);
-        rightTalon1.configContinuousCurrentLimit(30, 0);
-        rightTalon2.configContinuousCurrentLimit(30, 0);
-
-        //rightTalon1.setInverted(true);
-        //leftTalon1.setInverted(true);
+        setCurrentControls(leftTalon1, leftTalon2, rightTalon1, rightTalon2);
     }
 
+    public void setCurrentControls(WPI_TalonSRX... talons)
+    {
+        for(WPI_TalonSRX currentTalon : talons)
+        {
+            currentTalon.configContinuousCurrentLimit(25, 0);
+            currentTalon.configPeakCurrentLimit(30, 0);
+            currentTalon.configPeakCurrentDuration(10, 0);
+            currentTalon.enableCurrentLimit(true);
+        }
 
+    }
     @Override
     public void initDefaultCommand() 
     {
