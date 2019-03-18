@@ -30,8 +30,11 @@ public final class RobotConstants
     public static final int PANEL_GRABBER_PISTON_CHANNEL = 2;
 
     // SecondaryWheelsPistons Subsystem
-    public static final int FRONT_PISTONS = 3;
-    public static final int FRONT_PISTON_TOGGLE = 5;
-    public static final int BACK_PISTONS = 4;
-    public static final int BACK_PISTON_TOGGLE = 6;
+    public static final int FRONT_PISTONS_CHANNEL = 3;
+    public static final int FRONT_PISTON_SECOND_LEVEL_CHANNEL = 5;
+    public static final int BACK_PISTONS_CHANNEL = 4;
+    public static final int BACK_PISTON_SECOND_LEVEL_CHANNEL = 6;
+
+    //DefenseOffensePneumaticShifter Subsystem
+    public static final int GRABBER_SHIFTER_CHANNEL = 7;
 }

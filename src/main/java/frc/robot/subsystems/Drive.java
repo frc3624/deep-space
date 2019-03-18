@@ -26,13 +26,17 @@ public class Drive extends Subsystem
         leftTalon1 = new WPI_TalonSRX(leftTalon1ID);
         leftTalon2 = new WPI_TalonSRX(leftTalon2ID);
         leftSpeedControllerGroup = new SpeedControllerGroup(leftTalon1, leftTalon2);
+        // leftSpeedControllerGroup = new SpeedControllerGroup(leftTalon1);
+        // leftSpeedControllerGroup = new SpeedControllerGroup(leftTalon2);
 
         rightTalon1 = new WPI_TalonSRX(rightTalon1ID);
         rightTalon2 = new WPI_TalonSRX(rightTalon2ID);
         rightSpeedControllerGroup = new SpeedControllerGroup(rightTalon1, rightTalon2);
+        // rightSpeedControllerGroup = new SpeedControllerGroup(rightTalon1);
+        // rightSpeedControllerGroup = new SpeedControllerGroup(rightTalon2);
 
         differentialDrive = new DifferentialDrive(leftSpeedControllerGroup, rightSpeedControllerGroup);
-
+        
         setCurrentControls(leftTalon1, leftTalon2, rightTalon1, rightTalon2);
     }
 
@@ -40,8 +44,8 @@ public class Drive extends Subsystem
     {
         for(WPI_TalonSRX currentTalon : talons)
         {
-            currentTalon.configContinuousCurrentLimit(25, 0);
-            currentTalon.configPeakCurrentLimit(30, 0);
+            currentTalon.configContinuousCurrentLimit(30, 0);
+            currentTalon.configPeakCurrentLimit(35, 0);
             currentTalon.configPeakCurrentDuration(10, 0);
             currentTalon.enableCurrentLimit(true);
         }

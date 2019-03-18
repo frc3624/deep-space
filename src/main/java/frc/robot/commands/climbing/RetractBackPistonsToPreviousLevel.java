@@ -25,9 +25,7 @@ public class RetractBackPistonsToPreviousLevel extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    System.out.println("Retracting Back Level: " + Robot.backPistons.getCurrentLevel());
     Robot.backPistons.previousLevel();
-    System.out.println("New Back Level: " + Robot.backPistons.getCurrentLevel());
   }
 
 }

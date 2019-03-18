@@ -36,11 +36,11 @@ public class GearShifter extends Subsystem {
     private final Solenoid evoShifters;
     private GearMode currentMode;
 
-  public GearShifter(int pcmChannel, int evoShiftersChannel)
-  {
-    evoShifters = new Solenoid(pcmChannel, evoShiftersChannel);
-    setGearMode(GearMode.LOW);
-  }
+    public GearShifter(int pcmID, int evoShiftersChannel)
+    {
+        evoShifters = new Solenoid(pcmID, evoShiftersChannel);
+        setGearMode(GearMode.LOW);
+    }
 
     public void setGearMode(GearMode mode) {
         currentMode = mode;
@@ -55,7 +55,7 @@ public class GearShifter extends Subsystem {
     public GearMode getCurrentMode() {
         return currentMode;
     }
-
+    
     @Override
     public void initDefaultCommand() {
         

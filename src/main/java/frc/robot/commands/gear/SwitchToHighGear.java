@@ -19,7 +19,6 @@ public class SwitchToHighGear extends InstantCommand {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    System.out.println("high gear");
     Robot.gearShifter.setGearMode(GearMode.HIGH);
   }
 }

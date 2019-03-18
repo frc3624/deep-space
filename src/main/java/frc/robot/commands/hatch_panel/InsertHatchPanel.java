@@ -10,6 +10,7 @@ package frc.robot.commands.hatch_panel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.HatchPanelGrabber.BeakPositionMode;
 
 public class InsertHatchPanel extends Command {
   private Timer tm;
@@ -27,14 +28,14 @@ public class InsertHatchPanel extends Command {
   protected void initialize() {
     currentState = 0;
     tm.start();
-    if (Robot.hatchPanelGrabber.isOpen())
+    if (Robot.hatchPanelGrabber.getCurrentMode() == BeakPositionMode.OPEN)
     {
-      Robot.hatchPanelGrabber.closeClaw();
+      Robot.hatchPanelGrabber.closeBeak();
       beakWasOpened = false;
     }
     else
     {
-      Robot.hatchPanelGrabber.openClaw();
+      Robot.hatchPanelGrabber.openBeak();
       beakWasOpened = true;
     }
   }

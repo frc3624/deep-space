@@ -5,14 +5,42 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class HatchPanelGrabber extends Subsystem 
 {
+    public enum BeakPositionMode
+    {
+        OPEN(false),
+        CLOSED(true);
 
-    private final Solenoid reverseClaw;
+        private boolean value;
+        BeakPositionMode(boolean value)
+        {
+            this.value = value;
+        }
+
+        public boolean getValue()
+        {
+            return value;
+        }
+
+        public BeakPositionMode getOpposite()
+        {
+            return (this == OPEN) ? CLOSED : OPEN;
+        }
+
+        @Override
+        public String toString()
+        {
+            return (this == OPEN) ? "OPEN" : "CLOSED";
+        }
+    }
+
+    private final Solenoid reverseBeakSolenoid;
     private Solenoid pistonSolenoid;
-    
+    private BeakPositionMode currentPosition;
+
     public HatchPanelGrabber(int pcmID, int reverseClawChannel, int pistonChannel)    
     {
-        reverseClaw = new Solenoid(pcmID, reverseClawChannel);
-        openClaw();
+        reverseBeakSolenoid = new Solenoid(pcmID, reverseClawChannel);
+        openBeak();
 
         pistonSolenoid = new Solenoid(pcmID, pistonChannel);
         retractPiston();
@@ -24,6 +52,17 @@ public class HatchPanelGrabber extends Subsystem
 
     }
 
+    public void setPosition(BeakPositionMode position)
+    {
+        this.currentPosition = position;
+        this.reverseBeakSolenoid.set(position.getValue());
+    }
+
+    public BeakPositionMode getCurrentMode()
+    {
+        return currentPosition;
+    }
+    
     public void extendPiston() 
     {
         pistonSolenoid.set(true);
@@ -33,20 +72,14 @@ public class HatchPanelGrabber extends Subsystem
     {
         pistonSolenoid.set(false);
     }
-
-    public void openClaw() 
+    
+    public void openBeak() 
     {
-        reverseClaw.set(false);
+        setPosition(BeakPositionMode.OPEN);
     }
 
-    public void closeClaw() 
+    public void closeBeak() 
     {
-        reverseClaw.set(true);
+        setPosition(BeakPositionMode.CLOSED);
     }
-
-    public boolean isOpen() 
-    {
-        return !reverseClaw.get();
-    }
-
 }

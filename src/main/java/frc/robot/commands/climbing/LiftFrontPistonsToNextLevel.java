@@ -25,9 +25,7 @@ public class LiftFrontPistonsToNextLevel extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    System.out.println("Lifting Front Level: " + Robot.frontPistons.getCurrentLevel());
     Robot.frontPistons.nextLevel();
-    System.out.println("New Front Level: " + Robot.frontPistons.getCurrentLevel());
   }
 
 }

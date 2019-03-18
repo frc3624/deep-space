@@ -11,6 +11,7 @@ public class SecondaryWheelsPistons extends Subsystem
     private final Solenoid mainPiston;
     private final Solenoid secondValve;
     private int currentLevel;
+    
     public SecondaryWheelsPistons(int pcmID, int mainChannel, int toggleChannel)
     {
         currentLevel = 0;

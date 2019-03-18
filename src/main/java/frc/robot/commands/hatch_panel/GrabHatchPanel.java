@@ -13,6 +13,6 @@ public class GrabHatchPanel extends InstantCommand {
   @Override
   protected void initialize() {
     Robot.hatchPanelGrabber.retractPiston();
-    Robot.hatchPanelGrabber.openClaw();
+    Robot.hatchPanelGrabber.openBeak();
   }
 }

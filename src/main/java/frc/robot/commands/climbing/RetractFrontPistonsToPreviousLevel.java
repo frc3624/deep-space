@@ -25,9 +25,7 @@ public class RetractFrontPistonsToPreviousLevel extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    System.out.println("Retracting Front Level: " + Robot.frontPistons.getCurrentLevel());
     Robot.frontPistons.previousLevel();
-    System.out.println("New Front Level: " + Robot.frontPistons.getCurrentLevel());
   }
 
 }

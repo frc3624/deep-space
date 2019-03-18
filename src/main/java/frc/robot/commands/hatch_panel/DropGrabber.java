@@ -5,21 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.gear;
+package frc.robot.commands.hatch_panel;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
-import frc.robot.subsystems.GearShifter.GearMode;
 
-public class SwitchToLowGear extends InstantCommand {
-  public SwitchToLowGear() {
-    requires(Robot.gearShifter);
-  }
+/**
+ * Add your docs here.
+ */
+public class DropGrabber extends InstantCommand {
+    /**
+     * Add your docs here.
+     */
+    public DropGrabber() {
+        requires(Robot.pneumaticGrabberShifter);
+    }
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-    Robot.gearShifter.setGearMode(GearMode.LOW);
-  }
+    // Called once when the command executes
+    @Override
+    protected void initialize()
+    {
+        Robot.pneumaticGrabberShifter.dropGrabber();
+    }
 }

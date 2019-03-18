@@ -25,10 +25,9 @@ public class TurnOnUSBCamera extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    if(Robot.visionThread == null)
+    if(Robot.vision.getUSBCameraThread() == null)
     {
-      Robot.setUpCamera();
+      Robot.vision.setUpUSBCamera();
     }
   }
-
 }

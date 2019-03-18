@@ -1,8 +1,10 @@
 package frc.robot.oi;
 
+import java.util.EnumSet;
+
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import frc.robot.commands.TurnOnUSBCamera;
@@ -12,7 +14,10 @@ import frc.robot.commands.climbing.RetractBackPistonsToPreviousLevel;
 import frc.robot.commands.climbing.RetractFrontPistonsToPreviousLevel;
 import frc.robot.commands.climbing.RetractLiftingPistons;
 import frc.robot.commands.gear.SwitchGears;
+import frc.robot.commands.hatch_panel.DropGrabber;
 import frc.robot.commands.hatch_panel.InsertHatchPanel;
+import frc.robot.oi.DPadTrigger.DPadDirection;
+import frc.robot.subsystems.RaiseGrabber;
 
 /**
  * The operator interface class. Must be intitialized AFTER all subsystems.
@@ -35,6 +40,8 @@ public class OI {
     private JoystickButton liftBackPistonButton, retractBackPistonButton;
     private JoystickButton retractBothLiftersButton;
     private Trigger setUpCameraButton;
+    private Trigger dropGrabberButton;
+    private Trigger raiseGrabberButton;
 
     public OI(int driveControllerPort/*, int climbControllerPort*/) 
     {
@@ -66,6 +73,12 @@ public class OI {
     
         setUpCameraButton = new XboxTriggerThreshold(driveController, Hand.kLeft);
         setUpCameraButton.whenActive(new TurnOnUSBCamera());
+
+        raiseGrabberButton = new DPadTrigger(driveController, EnumSet.of(DPadDirection.UP, DPadDirection.UP_LEFT, DPadDirection.UP_RIGHT));
+        raiseGrabberButton.whenActive(new RaiseGrabber());
+
+        dropGrabberButton = new DPadTrigger(driveController, EnumSet.of(DPadDirection.DOWN, DPadDirection.DOWN_LEFT, DPadDirection.DOWN_RIGHT));
+        dropGrabberButton.whenActive(new DropGrabber());
     }
 
     public GenericHID getDriveController() 
