@@ -86,7 +86,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
-        resetAllSolenoids();
     }
 
     @Override
