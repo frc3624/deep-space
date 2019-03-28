@@ -5,15 +5,15 @@ import frc.robot.Robot;
 
 public class RetractLiftingPistons extends InstantCommand {
   public RetractLiftingPistons() {
-    requires(Robot.frontPistons);
-    requires(Robot.backPistons);
+    requires(Robot.frontLiftingPistons);
+    requires(Robot.backLiftingPistons);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.frontPistons.fullyRetract();
-    Robot.backPistons.fullyRetract();
+    Robot.frontLiftingPistons.fullyRetract();
+    Robot.backLiftingPistons.fullyRetract();
   }
 }
 

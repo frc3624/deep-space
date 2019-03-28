@@ -19,13 +19,13 @@ public class LiftFrontPistonsToNextLevel extends InstantCommand {
    */
   public LiftFrontPistonsToNextLevel() {
     super();
-    requires(Robot.frontPistons);
+    requires(Robot.frontLiftingPistons);
   }
 
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.frontPistons.nextLevel();
+    Robot.frontLiftingPistons.nextLevel();
   }
 
 }

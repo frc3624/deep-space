@@ -42,6 +42,7 @@ public class PneumaticGrabberShifter extends Subsystem {
             return (this == UP) ? "UP" : "DOWN";
         }
     }
+    
     /**
      * Add your docs here.
      */
@@ -63,15 +64,17 @@ public class PneumaticGrabberShifter extends Subsystem {
     {
         setMode(GrabberMode.UP);
     }
+
     public void dropGrabber()
     {
-        // setMode(GrabberMode.DOWN);
+        setMode(GrabberMode.DOWN);
     }
 
     public GrabberMode getCurrentMode()
     {
         return currentMode;
     }
+
     public void setMode(GrabberMode mode)
     {
         this.currentMode = mode;

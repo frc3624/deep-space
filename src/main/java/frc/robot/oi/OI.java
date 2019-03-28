@@ -16,8 +16,8 @@ import frc.robot.commands.climbing.RetractLiftingPistons;
 import frc.robot.commands.gear.SwitchGears;
 import frc.robot.commands.hatch_panel.DropGrabber;
 import frc.robot.commands.hatch_panel.InsertHatchPanel;
+import frc.robot.commands.hatch_panel.RaiseGrabber;
 import frc.robot.oi.DPadTrigger.DPadDirection;
-import frc.robot.subsystems.RaiseGrabber;
 
 /**
  * The operator interface class. Must be intitialized AFTER all subsystems.
@@ -71,8 +71,8 @@ public class OI {
         retractBothLiftersButton = new JoystickButton(driveController, LEFT_BUMPER); //FALLBACK/JULIANA Button
         retractBothLiftersButton.whenPressed(new RetractLiftingPistons());
     
-        setUpCameraButton = new XboxTriggerThreshold(driveController, Hand.kLeft);
-        setUpCameraButton.whenActive(new TurnOnUSBCamera());
+        // setUpCameraButton = new XboxTriggerThreshold(driveController, Hand.kLeft);
+        // setUpCameraButton.whenActive(new TurnOnUSBCamera());
 
         raiseGrabberButton = new DPadTrigger(driveController, EnumSet.of(DPadDirection.UP, DPadDirection.UP_LEFT, DPadDirection.UP_RIGHT));
         raiseGrabberButton.whenActive(new RaiseGrabber());

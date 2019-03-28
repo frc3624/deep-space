@@ -19,13 +19,13 @@ public class RetractFrontPistonsToPreviousLevel extends InstantCommand {
    */
   public RetractFrontPistonsToPreviousLevel() {
     super();
-    requires(Robot.frontPistons);
+    requires(Robot.frontLiftingPistons);
   }
 
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.frontPistons.previousLevel();
+    Robot.frontLiftingPistons.previousLevel();
   }
 
 }

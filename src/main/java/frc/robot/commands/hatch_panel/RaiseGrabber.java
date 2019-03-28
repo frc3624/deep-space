@@ -25,6 +25,7 @@ public class RaiseGrabber extends InstantCommand {
 	@Override
 	protected void initialize() 
 	{
+		System.out.println("Raising Grabber");
 		Robot.pneumaticGrabberShifter.raiseGrabber();
 	}
 

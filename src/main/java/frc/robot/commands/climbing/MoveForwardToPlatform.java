@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.SecondaryWheels;
-import frc.robot.subsystems.SecondaryWheelsPistons;
+import frc.robot.subsystems.LiftingPistons;
 
 public class MoveForwardToPlatform extends Command 
 {

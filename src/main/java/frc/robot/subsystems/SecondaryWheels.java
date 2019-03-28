@@ -14,19 +14,21 @@ import frc.robot.commands.DriveSecondaryWheels;
 public class SecondaryWheels extends Subsystem 
 {
 
-    public final static double KV_RATING = 50; // RPM/V
-    public final static double WHEEL_CIRCUMFERENCE = 4; // inches
+    public static final double KV_RATING = 50; // RPM/V
+    public static final double WHEEL_CIRCUMFERENCE = 4; // inches
 
     private final WPI_TalonSRX wheels;
+    private final LiftingPistons liftingPistons;
 
-    public SecondaryWheels(int talonID) 
+    public SecondaryWheels(int talonID, LiftingPistons liftingPistons) 
     {
         wheels = new WPI_TalonSRX(talonID);
+        this.liftingPistons = liftingPistons;
     }
 
     public void set(double speed) 
     {
-        if (Robot.backPistons.getCurrentLevel() != 0)
+        if (liftingPistons.getCurrentLevel() != LiftingPistons.LiftingPistonLevel.ZERO)
         {
             wheels.set(speed);
         }
@@ -34,7 +36,7 @@ public class SecondaryWheels extends Subsystem
 
     public void set(ControlMode mode, double value) 
     {
-        if (Robot.backPistons.getCurrentLevel() != 0)
+        if (liftingPistons.getCurrentLevel() != LiftingPistons.LiftingPistonLevel.ZERO)
         {
             wheels.set(mode, value);
         }
