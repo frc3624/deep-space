@@ -36,6 +36,8 @@ public class LiftingPistons extends Subsystem
         {
           case ZERO:
             return ONE;
+          // case ONE:
+          //   return TWO;
           default:
             return this;
         }
@@ -47,6 +49,8 @@ public class LiftingPistons extends Subsystem
         {
           case ONE:
             return ZERO;
+          case TWO:
+            return ONE;
           default:
             return this;
         }
@@ -73,10 +77,10 @@ public class LiftingPistons extends Subsystem
     public LiftingPistons(int pcmID, int mainChannel, int toggleChannel)
     {
         mainLeftValve = new Solenoid(pcmID, mainChannel);
-        mainRightValve = mainLeftValve; //new Solenoid(pcmID, mainRightChannel);
+        mainRightValve = mainLeftValve;
 
         secondLeftValve = new Solenoid(pcmID, toggleChannel);
-        secondRightValve = secondLeftValve; //new Solenoid(pcmID, toggleRightChannel);
+        secondRightValve = secondLeftValve;
         setLevel(LiftingPistonLevel.ZERO);
     }
 
@@ -144,5 +148,5 @@ public class LiftingPistons extends Subsystem
     {
 
     }
-    
+
 }

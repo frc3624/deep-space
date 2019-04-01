@@ -39,7 +39,7 @@ import frc.robot.subsystems.Vision;
 public class Robot extends TimedRobot {
 
     public static Vision vision = new Vision();
-    public static DistanceSensors distanceSensor = new DistanceSensors(FRONT_ULTRASONIC_SENSOR_ID,
+    public static DistanceSensors distanceSensors = new DistanceSensors(FRONT_ULTRASONIC_SENSOR_ID,
             BACK_ULTRASONIC_SENSOR_ID);
 
     public static Drive drive = new Drive(DRIVE_LEFT_TALON_1_ID, DRIVE_LEFT_TALON_2_ID, DRIVE_RIGHT_TALON_1_ID,
@@ -70,12 +70,12 @@ public class Robot extends TimedRobot {
 
         ahrs = new AHRS(SerialPort.Port.kUSB);
         ahrs.enableLogging(true);
-        // vision.setUpUSBCamera();
     }
 
     @Override
     public void robotPeriodic() {
-        mainCompressor.setClosedLoopControl(true);
+        compressor.setClosedLoopControl(true);
+        updateDashboard();
     }
 
     @Override
@@ -112,7 +112,6 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() 
     {
-
     }
 
     @Override
@@ -126,11 +125,17 @@ public class Robot extends TimedRobot {
      */
     private void commonAutoAndTeleopPeriodic() 
     {
+        Scheduler.getInstance().run();
+    }
+
+    public void updateDashboard()
+    {
         SmartDashboard.putString("Front Pistons Level:", Integer.toString(frontLiftingPistons.getCurrentLevel().getNumericalLevel()));
         SmartDashboard.putString("Back Pistons Level:", Integer.toString(backLiftingPistons.getCurrentLevel().getNumericalLevel()));
         SmartDashboard.putString("Beak Position:", hatchPanelGrabber.getCurrentMode().toString());
         SmartDashboard.putString("Gear Mode", gearShifter.getCurrentMode().toString());
         SmartDashboard.putString("Grabber Position", pneumaticGrabberShifter.getCurrentMode().toString());
-        Scheduler.getInstance().run();
+        SmartDashboard.putNumber("Front Ultrasonic Sensor", distanceSensors.getFront());
+        SmartDashboard.putNumber("Back Ultrasonic Sensor", distanceSensors.getBack());
     }
 }

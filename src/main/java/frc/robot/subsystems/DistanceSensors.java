@@ -32,8 +32,6 @@ public class DistanceSensors extends Subsystem {
     @Override
     public void periodic() 
     {
-        SmartDashboard.putNumber("Front Ultrasonic Sensor", getFront());
-        SmartDashboard.putNumber("Back Ultrasonic Sensor", getBack());
     }
 
     public int getFront()

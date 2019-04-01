@@ -37,7 +37,7 @@ public class MoveForwardToPlatform extends Command
     @Override
     protected boolean isFinished() 
     {
-        return Robot.distanceSensor.frontIsOnPlatform();
+        return Robot.distanceSensors.frontIsOnPlatform();
     }
 
     @Override
