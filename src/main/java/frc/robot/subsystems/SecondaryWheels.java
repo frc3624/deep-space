@@ -31,6 +31,10 @@ public class SecondaryWheels extends Subsystem
         {
             wheels.set(speed);
         }
+        else
+        {
+            wheels.set(0);
+        }
     }
 
     public void set(ControlMode mode, double value) 
@@ -38,6 +42,10 @@ public class SecondaryWheels extends Subsystem
         if (liftingPistons.getCurrentLevel() != LiftingPistons.LiftingPistonLevel.ZERO)
         {
             wheels.set(mode, value);
+        }
+        else
+        {
+            wheels.set(0);
         }
     }
 

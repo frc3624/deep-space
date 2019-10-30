@@ -20,7 +20,7 @@ public final class RobotConstants
     public static final int BACK_ULTRASONIC_SENSOR_ID = 2;
 
     // Pneumatics - Used by multiple subsystems
-    public static final int PNEUMATICS_CONTROL_MODULE_ID = 14;
+    public static final int PNEUMATICS_CONTROL_MODULE_ID = 13;
 
     // GearShifter Subsystem
     public static final int EVO_SHIFTER_CHANNEL = 0;
