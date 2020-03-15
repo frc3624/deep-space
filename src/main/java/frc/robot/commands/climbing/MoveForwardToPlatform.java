@@ -3,6 +3,7 @@ package frc.robot.commands.climbing;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.SecondaryWheels;
@@ -28,12 +29,12 @@ public class MoveForwardToPlatform extends Command
     protected void execute() 
     {
         Robot.secondaryWheels.set(speed);
-        double smallMotorRPM = DriverStation.getInstance().getBatteryVoltage() * SecondaryWheels.KV_RATING * speed;
+        double smallMotorRPM = RobotController.getBatteryVoltage() * SecondaryWheels.KV_RATING * speed;
         double speed = smallMotorRPM * Math.PI * SecondaryWheels.WHEEL_CIRCUMFERENCE;
         double sign = this.speed / (this.speed == 0 ? 1 : Math.abs(speed));
         Robot.drive.set(ControlMode.Velocity, speed * sign);
     }
-
+    
     @Override
     protected boolean isFinished() 
     {

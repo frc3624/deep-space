@@ -17,7 +17,6 @@ import static frc.robot.RobotConstants.PANEL_GRABBER_REVERSE_CLAW_CHANNEL;
 import static frc.robot.RobotConstants.PNEUMATICS_CONTROL_MODULE_ID;
 import static frc.robot.RobotConstants.SECONDARY_WHEELS_ID;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
